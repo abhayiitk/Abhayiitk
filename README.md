@@ -1,5 +1,8 @@
 ### Hi there 👋
-
+Abhay Pratap Singh 
+I am doing my M.Tech in Geotechnical Engg., from IIT Kanpur
+And my research interest is Probabilistic Rock Mechanics
+Currently I’m working on topic "Brittle failure of rock in deep excavations and imprecise Global Sensitivity Analysis of deep excavations"
 <!--
 **abhayiitk/Abhayiitk** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

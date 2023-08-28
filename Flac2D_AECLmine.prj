@@ -1,0 +1,181 @@
+0 header
+1 code FLAC 7.0
+1 source giic v2.20.472
+1 date Fri Aug 18 18:04:04 IST 2023
+1 type giic-save
+0 flac
+1 config
+2 axisym false
+2 gwflow false
+2 pstress false
+2 cppudm false
+2 ats false
+2 creep false
+2 dynamic false
+2 thermal false
+2 twophase false
+2 extra 0
+2 units 0
+2 struct true
+2 advanced true
+2 water false
+2 interface false
+2 gravity true
+2 excludereg false
+2 solvefos true
+0 plots
+1 plot 0
+2 display
+3 viewport
+4 autorange true
+2 command plot pen grid gnum
+2 name Plot 2
+2 count 2
+2 item
+3 name grid
+3 switch 2
+2 item
+3 name gnum
+3 switch 1
+1 plot 0
+2 display
+3 viewport
+4 autorange true
+2 command plot pen plasticity
+2 name Plot 3
+2 count 1
+2 item
+3 name plasticity
+3 switch 1
+1 plot 0
+2 display
+3 viewport
+4 center 14.642971,15.088496
+4 radius 2.3785274
+4 orientation 0.0
+2 command plot pen grid grid plasticity
+2 name Plot 6
+2 title 
+2 count 3
+2 item
+3 name grid
+3 switch 2
+2 item
+3 name grid
+3 switch 2
+2 item
+3 name plasticity
+3 switch 1
+0 matlist
+0 CppModels
+0 project tree
+1 title 
+1 notes
+1 tree
+2 state
+3 file Mesh&geom
+3 lastedit 0
+3 batch
+4 text config
+4 text grid 300 300
+4 text gen 0,0 0,30 30,30 30,0
+4 text model ss
+4 text prop density 2690 bulk 3.33e10 s 2.5e10 t 10e6
+4 text prop  ft 1 ct 2
+4 text prop dilation 30
+4 text table 1 0,0 0.005,48 
+4 text table 2 0,50e6 0.002,15e6 
+4 text set g 9.81
+4 text fix x i=1
+4 text fix y j=1
+4 text fix x i=301
+4 text fix y j=301
+4 text gen circle 15,15 1.75
+4 text gen adjust
+4 text ini sxx -58e6 syy -13e6 sxy -9.2e6
+4 text ini xdis 0 ydis 0
+4 text ini xvel 0 yvel 0
+4 text model null region 150,150
+4 text apply yvel 0 long from 133,151 to 133,151
+4 text apply xvel 0 long from 133,151 to 133,151
+4 text cycle 1
+4 text set echo off
+4 text def relax_ini
+4 text   nstart = step
+4 text   nstop = nstart + ninc
+4 text end
+4 text def relax_hist
+4 text   if step < nstop
+4 text      step_inc = float(step - nstart)
+4 text      relax_hist = rstart - ((rstart - rstop)/ float(ninc)) * step_inc
+4 text   else
+4 text      relax_hist = rstop
+4 text   endif
+4 text end
+4 text def apply_rf
+4 text loop ii (ib_ap,ie_ap)
+4 text  loop jj (jb_ap,je_ap)
+4 text    if and(flags(ii,jj), 2) = 2 then
+4 text     if and(flags(ii,jj), 4) = 4 then
+4 text       xftmp = -xforce(ii,jj)
+4 text       yftmp = -yforce(ii,jj)
+4 text       command
+4 text        apply xforce=xftmp hist relax_hist i=ii j=jj
+4 text        apply yforce=yftmp hist relax_hist i=ii j=jj
+4 text       endcommand
+4 text     endif
+4 text    endif
+4 text  endloop
+4 text endloop
+4 text end
+4 text def relax_tractions
+4 text   relax_ini
+4 text   relax_hist
+4 text   apply_rf
+4 text end
+4 text set ninc=5000 rstart=1.0 rstop=0.0 ib_ap=133 ie_ap=168 jb_ap=133 je_ap=168
+4 text relax_tractions
+4 text history 1 relax_hist
+4 text solve
+4 text set echo off
+2 state
+3 file Material&boundrycondition
+3 lastedit 0
+3 batch
+0 vgrid
+1 body
+2 text begin_body ''
+2 text set version 1.0
+2 text ; General:
+2 text set autozone on zones 20 aspect 1.0 minsize 3
+2 text set autobc 0
+2 text ; Points:
+2 text ; Sizes: (zones)
+2 text ; Ratios: (zone middle)
+2 text ; Blocks:
+2 text end_body
+0 vgeo
+1 geo
+2 text begin_geo '<no name>'
+2 text set version 1.0
+2 text ; General:
+2 text set autocorner on 45.0
+2 text ; Points: (0)
+2 text ; Edges:
+2 text end_geo
+0 vsketch
+1 geo
+2 text begin_geo '<no name>'
+2 text set version 1.0
+2 text ; General:
+2 text set autocorner on 45.0
+2 text ; Points: (0)
+2 text ; Edges:
+2 text end_geo
+0 notes
+1 text prop c 50e6 f 0
+0 fish
+1 file
+1 notes
+1 record
+0 eof
